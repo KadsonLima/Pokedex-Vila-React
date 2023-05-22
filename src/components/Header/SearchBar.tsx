@@ -3,10 +3,10 @@ import { FaSearch } from 'react-icons/fa';
 
 const SearchBar = () => {
   return (
-    <InputGroup>
-      <Input placeholder="ID ou nome do Pokemon..." borderRadius={50}/>
+    <InputGroup  width={'83%'}maxWidth={'500px'} marginRight={'10px'} >
+      <Input bg={'white.400'}backgroundColor={'white'} placeholder="ID ou nome do Pokemon..." borderRadius={50}/>
       <InputLeftElement>
-        <Icon as={FaSearch} color="gray.500" />
+        <Icon as={FaSearch} color="red.500" />
       </InputLeftElement>
     </InputGroup>
   );
