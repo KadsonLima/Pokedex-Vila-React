@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@900&display=swap');
+
+:root{
+    --background-color: #E5E5E5;
+    --red-color: #CF2B2B;
+    --button-footer: #2B63CF;
+    --bg-modal-color: #EB7407;
+    --font-default: 'Righteous', cursive;
+    
+}
+
+h1{
+    font-family: 'Righteous', cursive;
+    color: #ffffff;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+    font-family: 'Roboto', cursive;
+
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button {
+    cursor: pointer;
+  }
