@@ -17,7 +17,7 @@ export interface Pokemon {
 }
 
 export const ListPokemons = () => {
-  const { response, loading, error } = useAxios({
+  const { response, loading } = useAxios({
     method: "GET",
     url: "/",
   });
