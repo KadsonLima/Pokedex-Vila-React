@@ -6,6 +6,12 @@ export const Home = lazy(() =>
   })),
 )
 
+export const Loading = lazy(() =>
+  import('../components/Loading').then(module => ({
+    default: module.Loading,
+  })),
+)
+
 // export const GenericNotFound = lazy(() =>
 //   import('').then(module => ({
 //     default: module.GenericNotFound,

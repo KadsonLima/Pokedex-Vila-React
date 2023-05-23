@@ -5,10 +5,11 @@ import {
   Routes as RoutesReactRouterDom,
 } from 'react-router-dom'
 import { Home } from './paths'
+import { Loading } from '../components/Loading'
 
 export const Routes = () => {
   return (
-    <Suspense fallback={<>Carregando..</>}>
+    <Suspense fallback={<Loading/>}>
       <RoutesReactRouterDom>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/404" />} />
