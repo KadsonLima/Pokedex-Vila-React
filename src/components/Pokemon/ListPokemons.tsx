@@ -3,6 +3,8 @@ import { useAxios } from "../../hooks/useApi";
 import { useEffect, useState } from "react";
 
 import { Pokemon } from "./PokemonCard";
+import { useDispatch, useSelector } from "react-redux";
+import { updateValue } from "../../redux/actions";
 
 interface PokemonList {
   count: number;
@@ -17,26 +19,33 @@ export interface Pokemon {
 }
 
 export const ListPokemons = () => {
-  const { response, loading } = useAxios({
-    method: "GET",
-    url: "/",
-  });
+  const [config, setConfig] = useState<{ method: string; url: string } | null>(null);
+  const { response, loading } = useAxios(config);
+  const pokemonRedux = useSelector((state: any) => state.pokemon);
 
-  const [pokemonList, setPokemonList] = useState<PokemonList | undefined>(
-    undefined
-  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const newConfig = {
+      method: "GET",
+      url: "/",
+      // outras configurações desejadas
+    };
+    setConfig(newConfig);
+  }, []);
 
   useEffect(() => {
     if (response) {
-      setPokemonList(response.data);
+      dispatch(updateValue(response.data));
     }
   }, [response]);
 
-  if (loading) return <Spinner thickness="4px" speed="0.65s" color="#b40c0c" size="xl" />;
+  if (loading)
+    return <Spinner thickness="4px" speed="0.65s" color="#b40c0c" size="xl" />;
 
-  const PokemonList = pokemonList?.results.map((pokemon) => {
+  const PokemonList = pokemonRedux.value?.results.map((pokemon: Pokemon) => {
     return <Pokemon key={pokemon.name} pokemon={pokemon} />;
   });
-   
-  return <>{PokemonList}</>
+
+  return <>{PokemonList}</>;
 };
