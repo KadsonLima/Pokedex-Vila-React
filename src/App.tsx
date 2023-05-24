@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 import { ChakraProvider } from '@chakra-ui/react';
 import { Routes } from './routes'
-import './styles/global.css'
+import "./styles/global.css"
 
 
 

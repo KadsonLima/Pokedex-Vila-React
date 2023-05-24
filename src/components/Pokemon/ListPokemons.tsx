@@ -6,20 +6,16 @@ import { Pokemon } from "./PokemonCard";
 import { useDispatch, useSelector } from "react-redux";
 import { updateValue } from "../../redux/actions";
 
-interface PokemonList {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: Pokemon[];
-}
 
 export interface Pokemon {
+  id: string;
   name: string;
   url: string;
 }
 
 export const ListPokemons = () => {
   const [config, setConfig] = useState<{ method: string; url: string } | null>(null);
+  //@ts-expect-error
   const { response, loading } = useAxios(config);
   const pokemonRedux = useSelector((state: any) => state.pokemon);
 

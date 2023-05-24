@@ -3,10 +3,6 @@ import { Box } from "@chakra-ui/react";
 const FilterButton = () => {
   const [selectedFilter, setSelectedFilter] = useState("");
 
-  const handleFilter = () => {
-    // Lógica para aplicar o filtro selecionado
-  };
-
   return (
     <Box
       width={"40px"}

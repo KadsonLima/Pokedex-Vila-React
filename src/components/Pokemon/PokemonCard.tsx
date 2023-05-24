@@ -11,6 +11,7 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
   const [config, setConfig] = useState<{ method: string; url: string } | null>(
     null
   );
+  //@ts-expect-error
   const { response } = useAxios(config);
 
   const [pokemonData, setPokemon] = useState<PokemonData | undefined>(
@@ -51,7 +52,9 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
         fontWeight="light"
         fontSize={pokemonSize.fontSizeId}
       >
-        {formatNumber(pokemonData?.id)}
+        
+        {//@ts-expect-error
+        formatNumber(pokemonData?.id)}
       </Text>
       <Image
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonData?.id}.png`}

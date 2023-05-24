@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { updateValue } from "../../redux/actions";
 import { useAxios } from "../../hooks/useApi";
+import { AxiosResponse } from "axios";
 
 const SearchBar = () => {
   const pokemonRedux = useSelector((state: any) => state.pokemon.value);
@@ -12,6 +13,7 @@ const SearchBar = () => {
   const [oldList, setOldList] = useState(pokemonRedux);
   const [config, setConfig] = useState<{ method: string; url: string } | null>(null);
   const [booleanRequest, setBoolean] = useState(true);
+  //@ts-expect-error
   const { response } = useAxios(config);
   const dispatch = useDispatch();
   const [currentResponse, setCurrentResponse] = useState<AxiosResponse | undefined>();
@@ -33,6 +35,7 @@ useEffect(() =>{
       if(!booleanRequest){
         dispatch(updateValue({...oldList, results: [currentResponse] }))
       }else{
+        //@ts-expect-error
         dispatch(updateValue(currentResponse))
       }
     }
