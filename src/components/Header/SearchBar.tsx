@@ -9,43 +9,52 @@ import { useAxios } from "../../hooks/useApi";
 const SearchBar = () => {
   const pokemonRedux = useSelector((state: any) => state.pokemon.value);
   const [nameOrId, setNameId] = useState("");
-  const [oldList, setOldList] = pokemonRedux ? useState(pokemonRedux) : useState(null);
+  const [oldList, setOldList] = useState(pokemonRedux);
   const [config, setConfig] = useState<{ method: string; url: string } | null>(null);
-  const { response, error, loading } = useAxios(config);
+  const [booleanRequest, setBoolean] = useState(true);
+  const { response } = useAxios(config);
   const dispatch = useDispatch();
   const [currentResponse, setCurrentResponse] = useState<AxiosResponse | undefined>();
+
+useEffect(() =>{
+  if(!oldList) setOldList(pokemonRedux)
+}, [pokemonRedux])
 
   useEffect(() => {
     if (response?.data) {
       setCurrentResponse(response.data);
     }
+
+    
   }, [response]);
 
   useEffect(() => {
     if (currentResponse) {
-      const obj = {...oldList, results: [currentResponse] }
-      console.log(obj);
-      
-      dispatch(updateValue(obj));
+      if(!booleanRequest){
+        dispatch(updateValue({...oldList, results: [currentResponse] }))
+      }else{
+        dispatch(updateValue(currentResponse))
+      }
     }
   }, [currentResponse]);
 
   const handleSearch = () => {
 
-    if(nameOrId !== undefined){
+    if(nameOrId != undefined){
       const newConfig = {
         method: "GET",
         url: `/${nameOrId}`,
-        // outras configurações desejadas
       };
       setConfig(newConfig);
+      setBoolean(false);
     }else{
       const newConfig = {
         method: "GET",
         url: `/`,
-        // outras configurações desejadas
       };
+
       setConfig(newConfig);
+      setBoolean(true);
     }
    
     
@@ -64,7 +73,7 @@ const SearchBar = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setNameId(value);
-    const filtrados = pokemonRedux.results.filter((pokemon: any) =>
+    const filtrados = oldList.results.filter((pokemon: any) =>
       pokemon.name.startsWith(value)
     );
     const filterPokemons = { ...oldList, results: filtrados };
