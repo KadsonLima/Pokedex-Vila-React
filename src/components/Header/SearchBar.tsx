@@ -1,66 +1,30 @@
-import { Input, InputGroup, InputLeftElement, Icon, useToast, Toast } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Input, InputGroup, InputLeftElement, Icon , useToast} from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { updateValuePokemon } from "../../redux/actions";
-import { useAxios } from "../../hooks/useApi";
-import { AxiosResponse } from "axios";
+import { Pokemon, PokemonList } from "../Pokemon/ListPokemons";
+import useSearchPokemon from "../../hooks/api/useSearchPokemon";
 
-const SearchBar = () => {
+export const SearchBar = ({listPokemon, setPokemon}:{listPokemon:PokemonList, setPokemon:Function}) => {
   const pokemonRedux = useSelector((state: any) => state.pokemon.value);
-  const [nameOrId, setNameId] = useState("");
-  const [oldList, setOldList] = useState(pokemonRedux);
-  const [config, setConfig] = useState<{ method: string; url: string } | null>(null);
-  const [booleanRequest, setBoolean] = useState(true);
-  //@ts-expect-error
-  const { response, error } = useAxios(config);
-  const dispatch = useDispatch();
-  const [currentResponse, setCurrentResponse] = useState<AxiosResponse | undefined>();
+  const { getPokemon } = useSearchPokemon();
+  const [searchTerm, setSearchTerm] = useState("");
+  const toast = useToast();
 
-useEffect(() =>{
-  if(!oldList) setOldList(pokemonRedux)
-
-}, [pokemonRedux])
-
-  useEffect(() => {
-    if (response?.data) {
-     return setCurrentResponse(response.data);
+  const handleSearch = async () => {
+    try {
+      const pokemon = await getPokemon(searchTerm);
+      const newPokemon = {...listPokemon, results:[{url:`https://pokeapi.co/api/v2/pokemon/${pokemon.id}/`}]}
+      setPokemon(newPokemon)
+     
+    } catch (error) {
+      toast({
+        title: "Pokemon não encontrado!",
+        description: "Verifique o nome ou id do pokemon",
+        status: "error",
+        duration: 3000,
+      });
     }
-    
-    
-  }, [response]);
-
-  useEffect(() => {
-    if (currentResponse) {
-      if(!booleanRequest){
-        dispatch(updateValuePokemon({...oldList, results: [currentResponse] }))
-      }else{
-        dispatch(updateValuePokemon(currentResponse))
-      }
-    }
-  }, [currentResponse]);
-
-  const handleSearch = () => {
-
-    if(nameOrId != undefined){
-      const newConfig = {
-        method: "GET",
-        url: `/pokemon/${nameOrId}`,
-      };
-      setConfig(newConfig);
-      setBoolean(false);
-    }else{
-      const newConfig = {
-        method: "GET",
-        url: `/pokemon/`,
-      };
-
-      setConfig(newConfig);
-      setBoolean(true);
-    }
-   
-    
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -69,30 +33,36 @@ useEffect(() =>{
     }
   };
 
+  useEffect(()=>{
+    const pokemonsFilter = pokemonRedux?.results.filter((pokemon:Pokemon) => { 
+      if(pokemon.name.startsWith(searchTerm) || pokemon.url.replace("https://pokeapi.co/api/v2/pokemon/", '').slice(0, -1) == searchTerm)
+          return pokemon;
+    })
+    console.log(pokemonsFilter, pokemonRedux?.results);
+    pokemonRedux && setPokemon({...pokemonRedux, results:pokemonsFilter});
+    
+  },[searchTerm])
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+
+  };
+
   const handleIconClick = () => {
     handleSearch();
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setNameId(value);
-    const filtrados = oldList.results.filter((pokemon: any) =>
-      pokemon.name.startsWith(value)
-    );
-    const filterPokemons = { ...oldList, results: filtrados };
-    dispatch(updateValuePokemon(filterPokemons));
-  };
-
   return (
-    <InputGroup width={"83%"} maxWidth={"500px"} marginRight={"10px"}>
+    <InputGroup width="83%" maxWidth="500px" marginRight="10px">
       <Input
         type="text"
         onKeyDown={handleKeyDown}
-        value={nameOrId}
+        value={searchTerm}
         onChange={handleChange}
-        bg={"white.400"}
-        backgroundColor={"white"}
-        placeholder="ID ou nome do Pokemon..."
+        bg="white.400"
+        backgroundColor="white"
+        placeholder="ID ou nome do Pokémon..."
         borderRadius={50}
       />
       <InputLeftElement onClick={handleIconClick} cursor="pointer">

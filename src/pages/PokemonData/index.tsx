@@ -1,7 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { PokemonData as TypesPokemonData } from "../../interfaces/PokemonData";
-import { getPokemonColor } from "../../utils/pokemonColors";
 import { useEffect, useState } from "react";
 
 export function PokemonData() {
