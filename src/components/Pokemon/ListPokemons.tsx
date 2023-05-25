@@ -15,7 +15,6 @@ export interface PokemonList{
 }
 
 export const ListPokemons = ({pokemons}:{pokemons:PokemonList}) => {
-  console.log(pokemons)
 
   const PokemonList = pokemons.results.map((pokemon: Pokemon) => {
     return <Pokemon key={pokemon.name} pokemon={pokemon} />;

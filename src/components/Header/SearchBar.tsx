@@ -35,10 +35,9 @@ export const SearchBar = ({listPokemon, setPokemon}:{listPokemon:PokemonList, se
 
   useEffect(()=>{
     const pokemonsFilter = pokemonRedux?.results.filter((pokemon:Pokemon) => { 
-      if(pokemon.name.startsWith(searchTerm) || pokemon.url.replace("https://pokeapi.co/api/v2/pokemon/", '').slice(0, -1) == searchTerm)
+      if(pokemon.name.startsWith(searchTerm.toLowerCase()) || pokemon.url.replace("https://pokeapi.co/api/v2/pokemon/", '').slice(0, -1) == searchTerm)
           return pokemon;
     })
-    console.log(pokemonsFilter, pokemonRedux?.results);
     pokemonRedux && setPokemon({...pokemonRedux, results:pokemonsFilter});
     
   },[searchTerm])

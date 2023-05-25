@@ -17,7 +17,7 @@ const Header = ({listPokemon, setPokemon}:{listPokemon:PokemonList, setPokemon:F
         </Link>
       <Box display="flex" gap={0.1} justifyContent={"center"}>
         <SearchBar listPokemon={listPokemon} setPokemon={setPokemon}/>
-        <FilterButton />
+        <FilterButton listPokemon={listPokemon} setPokemon={setPokemon}/>
       </Box>
 
   </Box>
