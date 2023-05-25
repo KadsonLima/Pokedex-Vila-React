@@ -6,6 +6,10 @@ import { PokemonData } from "../../interfaces/PokemonData";
 import { pokemonSize } from "./BoxPokemonSize";
 import { formatNumber } from "../../utils/formatNumber";
 import { Pokemon as PokemonInterface } from "./ListPokemons";
+import { updateValueAnother } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 
 export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
   const [config, setConfig] = useState<{ method: string; url: string } | null>(
@@ -13,7 +17,7 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
   );
   //@ts-expect-error
   const { response } = useAxios(config);
-
+  const dispatch = useDispatch();
   const [pokemonData, setPokemon] = useState<PokemonData | undefined>(
     undefined
   );
@@ -22,7 +26,7 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
   useEffect(() => {
       setConfig({
         method: "GET",
-        url: `${pokemon.url?pokemon.url:"/"+pokemon.id}`,
+        url: `${pokemon.url?pokemon.url:"/pokemon/"+pokemon.id}`,
       });
 
   }, []);
@@ -32,9 +36,14 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
 
   },[response])
 
+  const selectPokemon = () =>{
+    dispatch(updateValueAnother(pokemonData))
+  }
+
   if (!response) return <SkeletonPokemon />;
 
   return (
+    <Link onClick={()=>selectPokemon()} to={`/pokemon/${pokemonData?.id}`}>
     <Flex
       m={0.1}
       boxShadow="0px 2px 2px 1px  rgba(0, 0, 0, 0.2), inset 0px 1px 3px 1px rgba(0, 0, 0, 0.25)"
@@ -46,6 +55,12 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
       position="relative"
       flexDirection={"column"}
       justifyContent={"space-between"}
+      _hover={{
+        boxShadow: "0px 4px 4px 2px rgba(0, 0, 0, 0.61), inset 0px 2px 6px 2px rgba(0, 0, 0, 0.25)",
+        cursor: "pointer",
+      }}
+      
+      
     >
       <Text
         textAlign="right"
@@ -76,5 +91,6 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
         {pokemonData?.name}
       </Text>
     </Flex>
+    </Link>
   );
 };

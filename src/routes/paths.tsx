@@ -12,8 +12,10 @@ export const Loading = lazy(() =>
   })),
 )
 
-// export const GenericNotFound = lazy(() =>
-//   import('').then(module => ({
-//     default: module.GenericNotFound,
-//   })),
-// )
+export const PokemonData = lazy(() =>
+  import('../pages/PokemonData/index').then(module => ({
+    default: module.PokemonData,
+  })),
+)
+
+

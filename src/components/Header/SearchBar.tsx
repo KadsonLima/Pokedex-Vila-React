@@ -1,9 +1,9 @@
-import { Input, InputGroup, InputLeftElement, Icon } from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftElement, Icon, useToast, Toast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { updateValue } from "../../redux/actions";
+import { updateValuePokemon } from "../../redux/actions";
 import { useAxios } from "../../hooks/useApi";
 import { AxiosResponse } from "axios";
 
@@ -14,29 +14,29 @@ const SearchBar = () => {
   const [config, setConfig] = useState<{ method: string; url: string } | null>(null);
   const [booleanRequest, setBoolean] = useState(true);
   //@ts-expect-error
-  const { response } = useAxios(config);
+  const { response, error } = useAxios(config);
   const dispatch = useDispatch();
   const [currentResponse, setCurrentResponse] = useState<AxiosResponse | undefined>();
 
 useEffect(() =>{
   if(!oldList) setOldList(pokemonRedux)
+
 }, [pokemonRedux])
 
   useEffect(() => {
     if (response?.data) {
-      setCurrentResponse(response.data);
+     return setCurrentResponse(response.data);
     }
-
+    
     
   }, [response]);
 
   useEffect(() => {
     if (currentResponse) {
       if(!booleanRequest){
-        dispatch(updateValue({...oldList, results: [currentResponse] }))
+        dispatch(updateValuePokemon({...oldList, results: [currentResponse] }))
       }else{
-        //@ts-expect-error
-        dispatch(updateValue(currentResponse))
+        dispatch(updateValuePokemon(currentResponse))
       }
     }
   }, [currentResponse]);
@@ -46,14 +46,14 @@ useEffect(() =>{
     if(nameOrId != undefined){
       const newConfig = {
         method: "GET",
-        url: `/${nameOrId}`,
+        url: `/pokemon/${nameOrId}`,
       };
       setConfig(newConfig);
       setBoolean(false);
     }else{
       const newConfig = {
         method: "GET",
-        url: `/`,
+        url: `/pokemon/`,
       };
 
       setConfig(newConfig);
@@ -80,7 +80,7 @@ useEffect(() =>{
       pokemon.name.startsWith(value)
     );
     const filterPokemons = { ...oldList, results: filtrados };
-    dispatch(updateValue(filterPokemons));
+    dispatch(updateValuePokemon(filterPokemons));
   };
 
   return (

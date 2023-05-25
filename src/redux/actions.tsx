@@ -1,33 +1,24 @@
-export enum ActionTypes {
-    INCREMENT = 'INCREMENT',
-    DECREMENT = 'DECREMENT',
-    UPDATE_VALUE = 'UPDATE_VALUE', // Nova action
-  }
-  
-  interface UpdateValueAction {
-    type: ActionTypes.UPDATE_VALUE;
-    payload: string; // Tipo do novo valor
-  }
-  
-  
-  export const updateValue = (value: string): UpdateValueAction => ({
-    type: ActionTypes.UPDATE_VALUE,
-    payload: value,
-  });
+export const ActionTypes = {
+  UPDATE_VALUE_POKEMON: 'UPDATE_VALUE_POKEMON',
+  UPDATE_VALUE_ANOTHER: 'UPDATE_VALUE_ANOTHER',
+};
 
-  interface IncrementAction {
-    type: ActionTypes.INCREMENT;
-  }
-  
-  interface DecrementAction {
-    type: ActionTypes.DECREMENT;
-  }
-  
-  export const increment = (): IncrementAction => ({
-    type: ActionTypes.INCREMENT,
-  });
-  
-  export const decrement = (): DecrementAction => ({
-    type: ActionTypes.DECREMENT,
-  });
-  
+export interface UpdateValuePokemonAction {
+  type: typeof ActionTypes.UPDATE_VALUE_POKEMON;
+  payload: any;
+}
+
+export interface UpdateValueAnotherAction {
+  type: typeof ActionTypes.UPDATE_VALUE_ANOTHER;
+  payload: any;
+}
+
+export const updateValuePokemon = (value: any): UpdateValuePokemonAction => ({
+  type: ActionTypes.UPDATE_VALUE_POKEMON,
+  payload: value,
+});
+
+export const updateValueAnother = (value: any): UpdateValueAnotherAction => ({
+  type: ActionTypes.UPDATE_VALUE_ANOTHER,
+  payload: value,
+});

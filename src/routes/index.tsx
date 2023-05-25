@@ -4,7 +4,7 @@ import {
   Route,
   Routes as RoutesReactRouterDom,
 } from 'react-router-dom'
-import { Home } from './paths'
+import { Home, PokemonData } from './paths'
 import { Loading } from '../components/Loading'
 
 export const Routes = () => {
@@ -12,6 +12,7 @@ export const Routes = () => {
     <Suspense fallback={<Loading/>}>
       <RoutesReactRouterDom>
         <Route path="/" element={<Home />} />
+        <Route path="/pokemon/:id" element={<PokemonData />} />
         <Route path="*" element={<Navigate to="/404" />} />
         
       </RoutesReactRouterDom>

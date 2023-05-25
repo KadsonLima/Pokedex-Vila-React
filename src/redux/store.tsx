@@ -1,12 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import anotherReducer from "./anotherReducer";
+import pokemonReducer from "./pokemonReducer";
 
-import pokemonReducer from './reducers';
+const rootReducer = combineReducers({
+  pokemon: pokemonReducer,
+  pokemonData: anotherReducer,
+});
 
 const store = configureStore({
-    reducer: {
-      // Define a top-level state field named `todos`, handled by `todosReducer`
-      pokemon: pokemonReducer,
-    }
-  });
+  reducer: rootReducer,
+});
 
 export default store;
