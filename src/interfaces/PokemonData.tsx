@@ -35,6 +35,15 @@ interface Ability {
     name: string;
     url: string;
   }
+
+  interface Type {
+    slot: number;
+    type: {
+      name: string;
+      url: string;
+    };
+  }
+  
   
   export interface PokemonData {
     abilities: {
@@ -62,4 +71,5 @@ interface Ability {
     };
     location_area_encounters: string;
     moves: Move[];
+    types:Type[];
   }

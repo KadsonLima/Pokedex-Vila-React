@@ -7,7 +7,7 @@ import "./styles/global.css"
 
 export const App = () => {
   return (
-    <ChakraProvider>
+    <ChakraProvider >
     <BrowserRouter>
           <Routes />
     </BrowserRouter>
