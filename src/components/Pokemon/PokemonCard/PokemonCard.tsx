@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { SkeletonPokemon } from "../../Skeleton/SkeletonPokemon";
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Text, Box } from "@chakra-ui/react";
 import { PokemonData } from "../../../interfaces/PokemonData";
 import { pokemonSize } from "../BoxPokemonSize";
 import { formatNumber } from "../../../utils/formatNumber";
@@ -58,6 +58,7 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
           height={pokemonSize.sizePokemonImage}
           style={styles.pokemonImageStyles}
         />
+         <Box style={{position:"absolute", backgroundColor:"#0e0c0c13", left:0, bottom:0, width:"100%", height:"40%"}}/>
         <Text
           textAlign="center"
           textTransform="capitalize"
