@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { PokemonData } from "../../interfaces/PokemonData";
 import { typeColors } from "../../utils/typeColors";
+import InfoComponent from "./InfoPokemon";
 
 
 export const About = ({
@@ -30,12 +31,10 @@ export const About = ({
           );
         })}
       </Flex>
-      <Text textAlign={"center"} fontWeight={"bold"} color={color}>
+      <Text textAlign={"center"} fontWeight={"bold"} color={color} margin="5px">
         About
       </Text>
-      <Flex>
-        <Flex></Flex>
-      </Flex>
+      <InfoComponent data={pokemonData}/>
       <Flex flexDirection={"column"}></Flex>
     </Box>
   );

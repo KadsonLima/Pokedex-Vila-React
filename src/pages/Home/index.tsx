@@ -1,4 +1,4 @@
-import { Box, Button, ButtonSpinner, Flex, Icon, Spinner, Toast } from "@chakra-ui/react";
+import { Box, Flex, Icon, Spinner } from "@chakra-ui/react";
 import Header from "../../components/Header/Header";
 import { ListPokemons, PokemonList } from "../../components/Pokemon/ListPokemons";
 import { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import useGetPokemons from "../../hooks/api/useGetPokemons";
 import { updateValuePokemon } from "../../redux/actions";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import { Loading } from "../../components/Loading";
 
 
 export function Home() {
@@ -51,6 +52,7 @@ export function Home() {
     }
   }
 
+  if (!listPokemon) return <Loading />;
 
   return (
     <>

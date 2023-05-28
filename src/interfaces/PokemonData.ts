@@ -55,6 +55,7 @@ interface Ability {
     forms: Form[];
     game_indices: GameIndex[];
     height: number;
+    weight: number;
     held_items: any[];
     name:string;
     id: number;
@@ -68,6 +69,11 @@ interface Ability {
       front_female: string | null;
       front_shiny: string | null;
       front_shiny_female: string | null;
+      other:{
+        "official-artwork":{
+          front_default:string
+        }
+      }
     };
     location_area_encounters: string;
     moves: Move[];

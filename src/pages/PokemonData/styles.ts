@@ -1,6 +1,7 @@
 const mainBoxStyle:any = {
     height: "100vh",
     maxWidth: "700px",
+    width:"100%",
     padding: "10px",
     position: "relative",
   };

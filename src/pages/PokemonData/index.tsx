@@ -1,4 +1,4 @@
-import { Box, Flex, Icon, Image, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Link, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { PokemonData as TypesPokemonData } from "../../interfaces/PokemonData";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import Pokeball from "../../assets/Pokeball.svg";
 
 export function PokemonData() {
-  const { id } = useParams();
+  const { id }:{id:string} = useParams();
   const [color, setColor] = useState("gray");
   const pokemonDataRedux: TypesPokemonData = useSelector(
     (state: any) => state.pokemonData.value
@@ -46,6 +46,7 @@ export function PokemonData() {
   if (!pokemonData) return <Loading />;
 
   return (
+    <Flex justifyContent={"center"} bg="#b40c0c">
     <Box bg={color} {...styles.mainBoxStyle} overflow="hidden">
       <Image src={Pokeball} position="absolute" right="-10%" filter="brightness(100%) saturate(0%) opacity(10%)" top={20} zIndex={0} width="60%"/>
       <Flex justifyContent={"space-between"} marginTop={2} alignItems={"center"} paddingLeft={45} >
@@ -65,5 +66,6 @@ export function PokemonData() {
         <BaseStats color={color} pokemonData={pokemonData} />
       </Flex>
     </Box>
+    </Flex>
   );
 }
