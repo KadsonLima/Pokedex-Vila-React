@@ -1,4 +1,4 @@
-import { Pokemon } from "./PokemonCard";
+import { Pokemon } from "./PokemonCard/PokemonCard";
 
 
 export interface Pokemon {

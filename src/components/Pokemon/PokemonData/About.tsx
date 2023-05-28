@@ -14,9 +14,10 @@ export const About = ({
   return (
     <Box width="100%" maxWidth={"700px"} marginTop="40px">
       <Flex justify={"center"} gap={3}>
-        {pokemonData.types.map(({ type }) => {
+        {pokemonData.types.map(({ type }, index) => {
           return (
             <Text
+              key={index}
               bg={typeColors[type.name]}
               fontWeight={"semibold"}
               color={"white"}

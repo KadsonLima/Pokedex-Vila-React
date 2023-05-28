@@ -13,7 +13,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import Pokeball from "../../assets/Pokeball.svg";
 
 export function PokemonData() {
-  const { id }:{id:string} = useParams();
+  const { id }:{id?:string} = useParams();
   const [color, setColor] = useState("gray");
   const pokemonDataRedux: TypesPokemonData = useSelector(
     (state: any) => state.pokemonData.value
@@ -40,7 +40,6 @@ export function PokemonData() {
     };
     fetchData();
   }, []);
-  console.log(pokemonData);
 
   if (!pokemonData) return <Loading />;
 

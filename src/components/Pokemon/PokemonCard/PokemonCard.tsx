@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { SkeletonPokemon } from "../Skeleton/SkeletonPokemon";
+import { SkeletonPokemon } from "../../Skeleton/SkeletonPokemon";
 import { Flex, Image, Text } from "@chakra-ui/react";
-import { PokemonData } from "../../interfaces/PokemonData";
-import { pokemonSize } from "./BoxPokemonSize";
-import { formatNumber } from "../../utils/formatNumber";
-import { Pokemon as PokemonInterface } from "./ListPokemons";
-import { updateValueAnother } from "../../redux/actions";
+import { PokemonData } from "../../../interfaces/PokemonData";
+import { pokemonSize } from "../BoxPokemonSize";
+import { formatNumber } from "../../../utils/formatNumber";
+import { Pokemon as PokemonInterface } from "../ListPokemons";
+import { updateValueAnother } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import useSearchPokemon from "../../hooks/api/useSearchPokemon";
+import useSearchPokemon from "../../../hooks/api/useSearchPokemon";
+import { styles } from "./styles";
 
 
 export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
@@ -39,20 +40,9 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
     <Link onClick={selectPokemon} to={`/pokemon/${pokemonData?.id}`}>
       <Flex
         m={0.1}
-        boxShadow="0px 2px 2px 1px  rgba(0, 0, 0, 0.2), inset 0px 1px 3px 1px rgba(0, 0, 0, 0.25)"
-        border={"2px solid #615e5e59"}
-        borderRadius={10}
-        padding={"3px 8px"}
+        {...styles.pokemonStyles}
         width={pokemonSize.width}
         height={pokemonSize.height}
-        position="relative"
-        flexDirection={"column"}
-        justifyContent={"space-between"}
-        _hover={{
-          boxShadow:
-            "0px 4px 4px 2px rgba(0, 0, 0, 0.61), inset 0px 2px 6px 2px rgba(0, 0, 0, 0.25)",
-          cursor: "pointer",
-        }}
       >
         <Text
           textAlign="right"
@@ -66,12 +56,7 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
           alt={pokemonData?.name}
           width={pokemonSize.sizePokemonImage}
           height={pokemonSize.sizePokemonImage}
-          style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
+          style={styles.pokemonImageStyles}
         />
         <Text
           textAlign="center"
@@ -84,3 +69,4 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
     </Link>
   );
 };
+
