@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { ProgressBar } from "../ProgressBar/ProgressBar";
-import { PokemonData } from "../../interfaces/PokemonData";
+import { ProgressBar } from "../../ProgressBar/ProgressBar";
+import { PokemonData } from "../../../interfaces/PokemonData";
+import { About } from "./About";
 
 const stats = ["hp", "atk", "def", "satk", "sdef", "spd"];
 
@@ -12,7 +13,8 @@ export const BaseStats = ({
   pokemonData: PokemonData;
 }) => {
   return (
-    <Box width="100%" maxWidth={"700px"}>
+    <Flex width="100%" maxWidth={"700px"} flexDirection={"column"} rowGap={5} >
+      <About color={color} pokemonData={pokemonData} />
       <Text textAlign={"center"} fontWeight={"bold"} color={color}>
         Base Stats
       </Text>
@@ -38,6 +40,6 @@ export const BaseStats = ({
           );
         })}
       </Flex>
-    </Box>
+    </Flex>
   );
 };

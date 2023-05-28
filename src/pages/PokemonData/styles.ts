@@ -22,14 +22,16 @@ const mainBoxStyle:any = {
     boxShadow: "inset 0 0 4px 4px #22222237",
     padding: "15px 10px",
     gap: 4,
-    flexWrap: "wrap" as const,
+    flexWrap: "nowrap" as const,
     overflowY: "auto",
     position: "absolute",
     left: "10px",
     bottom: "10px",
     right: "10px",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "end",
+    overflow: "scroll",
+
   };
 
   export const styles = {contentContainerStyle, mainBoxStyle, imageStyle}

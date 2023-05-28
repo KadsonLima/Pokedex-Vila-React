@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 import useSearchPokemon from "../../hooks/api/useSearchPokemon";
 import { useParams } from "react-router-dom";
 import { typeColors } from "../../utils/typeColors";
-import { BaseStats } from "../../components/Pokemon/BaseStats";
+import { BaseStats } from "../../components/Pokemon/PokemonData/BaseStats";
 import { Loading } from "../../components/Loading";
-import { About } from "../../components/Pokemon/About";
 import { styles } from "./styles";
 import { formatNumber } from "../../utils/formatNumber";
 import { FaArrowLeft } from "react-icons/fa";
@@ -62,7 +61,7 @@ export function PokemonData() {
         {...styles.imageStyle}
       />
       <Flex {...styles.contentContainerStyle}>
-        <About color={color} pokemonData={pokemonData} />
+        
         <BaseStats color={color} pokemonData={pokemonData} />
       </Flex>
     </Box>

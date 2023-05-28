@@ -1,6 +1,6 @@
 import { Flex, Icon, Text, Divider } from '@chakra-ui/react';
 import { FaRulerVertical, FaWeightHanging } from 'react-icons/fa';
-import { PokemonData } from '../../interfaces/PokemonData';
+import { PokemonData } from '../../../interfaces/PokemonData';
 
 const InfoComponent = ({data}:{data:PokemonData}) => {
   return (

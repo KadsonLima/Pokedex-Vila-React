@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { PokemonData } from "../../interfaces/PokemonData";
-import { typeColors } from "../../utils/typeColors";
+import { PokemonData } from "../../../interfaces/PokemonData";
+import { typeColors } from "../../../utils/typeColors";
 import InfoComponent from "./InfoPokemon";
 
 
@@ -12,7 +12,7 @@ export const About = ({
   pokemonData: PokemonData;
 }) => {
   return (
-    <Box width="100%" maxWidth={"700px"} marginTop="80px">
+    <Box width="100%" maxWidth={"700px"} marginTop="40px">
       <Flex justify={"center"} gap={3}>
         {pokemonData.types.map(({ type }) => {
           return (
