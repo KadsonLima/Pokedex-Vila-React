@@ -7,6 +7,7 @@ import useGetPokemons from "../../hooks/api/useGetPokemons";
 import { updateValuePokemon } from "../../redux/actions";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { Loading } from "../../components/Loading";
+import CookieBanner from "../../components/CookieBanner";
 
 
 export function Home() {
@@ -56,6 +57,7 @@ export function Home() {
 
   return (
     <>
+    <CookieBanner/>
       <Header listPokemon={listPokemon} setPokemon={setPokemon}/>
       <Box
         bg="#dc0a2d"

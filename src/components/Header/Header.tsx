@@ -9,7 +9,7 @@ const Header = ({listPokemon, setPokemon}:{listPokemon:PokemonList | null, setPo
 
   
   return (
-    <Box bg="#dc0a2d" py={4} position="fixed" top={0} left={0} right={0} zIndex="999" padding={'10px'}  display={"flex"} flexDirection={"column"} alignItems={"center"} justifyContent={"left"}>
+    <Box bg="#dc0a2d" py={4} position="fixed" top={0} left={0} right={0} zIndex="999" padding={'10px'}  display={"flex"} flexDirection={"column"} alignItems={"baseline"} justifyContent={"left"}>
 
         <Flex as="h1" gap={2} maxWidth={"500px"} width="100%" fontSize={"2xl"} display={"flex"} alignItems={"center"} justifyContent={"left"}>
             <Image src={Pokebola} alt="pokebola" />
