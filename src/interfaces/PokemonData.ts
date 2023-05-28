@@ -73,3 +73,4 @@ interface Ability {
     moves: Move[];
     types:Type[];
   }
+

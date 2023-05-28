@@ -62,9 +62,7 @@ export const Pokemon = ({ pokemon }: { pokemon: PokemonInterface }) => {
           {pokemonData && formatNumber(pokemonData.id)}
         </Text>
         <Image
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-            pokemonData?.id
-          }.png`}
+          src={`${pokemonData?.sprites.other["official-artwork"].front_default}`}
           alt={pokemonData?.name}
           width={pokemonSize.sizePokemonImage}
           height={pokemonSize.sizePokemonImage}
