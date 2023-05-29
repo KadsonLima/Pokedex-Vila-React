@@ -7,6 +7,8 @@ import { PokemonList } from "../Pokemon/ListPokemons";
 
 const Header = ({listPokemon, setPokemon}:{listPokemon:PokemonList | null, setPokemon:Function}) => {
 
+  const content = listPokemon && <><SearchBar listPokemon={listPokemon} setPokemon={setPokemon}/>
+  <FilterButton listPokemon={listPokemon} setPokemon={setPokemon}/></>
   
   return (
     <Box bg="#dc0a2d" py={4} position="fixed" top={0} left={0} right={0} zIndex="999" padding={'10px'}  display={"flex"} flexDirection={"column"} alignItems={"baseline"} justifyContent={"left"}>
@@ -16,8 +18,8 @@ const Header = ({listPokemon, setPokemon}:{listPokemon:PokemonList | null, setPo
             Pokédex
         </Flex>
       <Box display="flex" gap={0.1} justifyContent={"center"}>
-        <SearchBar listPokemon={listPokemon} setPokemon={setPokemon}/>
-        <FilterButton listPokemon={listPokemon} setPokemon={setPokemon}/>
+        {content}
+        
       </Box>
 
   </Box>

@@ -78,5 +78,6 @@ interface Ability {
     location_area_encounters: string;
     moves: Move[];
     types:Type[];
+    stats:any
   }
 

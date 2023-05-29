@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Pokemon, PokemonList } from "../Pokemon/ListPokemons";
 import useSearchPokemon from "../../hooks/api/useSearchPokemon";
 
-export const SearchBar = ({listPokemon, setPokemon}:{listPokemon:PokemonList, setPokemon:Function}) => {
+export const SearchBar = ({listPokemon, setPokemon}:{listPokemon:PokemonList | null, setPokemon:Function}) => {
   const pokemonRedux = useSelector((state: any) => state.pokemon.value);
   const { getPokemon } = useSearchPokemon();
   const [searchTerm, setSearchTerm] = useState("");

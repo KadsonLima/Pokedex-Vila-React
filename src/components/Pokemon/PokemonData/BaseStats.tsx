@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { ProgressBar } from "../../ProgressBar/ProgressBar";
 import { PokemonData } from "../../../interfaces/PokemonData";
 import { About } from "./About";
